@@ -14,9 +14,9 @@ const Role = require('../../controllers/roles.controller');
 //Load validation
 const validateRegisterRole = require('../../validations/role-registration');
 
-/**
+/*********************************
 * Post routes
-*/
+*********************************/
 //@route    POST api/roles/register
 //@desc     REGISTER a role
 //@access   PRIVATE
@@ -46,8 +46,32 @@ router.post('/register', (req, res) => {
 		});
 });
 
+/*********************************
+* PUT routes
+*********************************/
+//@route    PUT api/roles/updaterole
+//@desc     Update a role
+//@access   PRIVATE
+router.put('/updaterole', (req, res) => {
+	let updaterole = {
+		id: parseInt(req.body.id),
+		role_name: req.body.role,
+	};
+	Role.updateRole(updaterole)
+		.then(data => {
+			res.status(200).json(data);
+		})
+		.catch(err => {
+			res.status(400).json(err);
+			// res.status(400).json({ error: err.toString() });
+		});
+});
+
+/*********************************
+* GET routes
+*********************************/
 //@route    GET api/roles/getroles
-//@desc     Get  all roles
+//@desc     Get  all roles from the database
 //@access   Public
 router.get('/getroles', (req, res) => {
 	Role.getRoles()
@@ -60,7 +84,7 @@ router.get('/getroles', (req, res) => {
 });
 
 //@route    GET api/roles/rolesandusers
-//@desc     Get  all roles and users belonging to roles
+//@desc     Get all users belonging to any role
 //@access   Public
 router.get('/rolesandusers', (req, res) => {
 	Role.getRolesAndUsers()
@@ -69,6 +93,26 @@ router.get('/rolesandusers', (req, res) => {
 		})
 		.catch(err => {
 			res.status(404).json(err);
+		});
+});
+
+/*********************************
+* DELETE routes
+*********************************/
+//@route    DELETE api/roles/updaterole
+//@desc     Delete a role
+//@access   PRIVATE
+router.delete('/deleterole', (req, res) => {
+	let deleterole = {
+		id: parseInt(req.body.id),
+	};
+	Role.deleteRole(deleterole)
+		.then(data => {
+			res.status(200).json(data);
+		})
+		.catch(err => {
+			res.status(400).json(err);
+			// res.status(400).json({ error: err.toString() });
 		});
 });
 
