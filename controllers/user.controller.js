@@ -12,8 +12,12 @@ let user = {
 		return found;
 	},
 	saveUser: values => {
-		return db.Role.findById(values.RoleId).then(data => {
-			if (data !== null) {
+		return db.Role.findById(values.RoleId).then(role => {
+			// null will be returned if role was not found
+			if (role === null) {
+				return { error: 'Trying to assing an incorrect role.' };
+			} else {
+				//Save to the database
 				return db.User
 					.create(values, {
 						include: [
@@ -27,8 +31,6 @@ let user = {
 						console.log(err);
 						JSON.stringify(err);
 					});
-			} else {
-				return { error: 'Trying to assing an incorrect role.' };
 			}
 		});
 	},
