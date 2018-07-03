@@ -42,6 +42,24 @@ let user = {
 			.then(data => data)
 			.catch(err => JSON.stringify(err));
 	},
+	deleteUser: user => {
+		return db.User
+			.findById(user.id)
+			.then(userToDelete => {
+				console.log(userToDelete);
+				if (userToDelete !== null) {
+					return userToDelete.destroy(user).then(deleted => {
+						return { success: 'User has been deleted.' };
+					});
+				} else {
+					return { error: 'User does not exist' };
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).json({ err: 'error deleting from database' });
+			});
+	},
 };
 
 module.exports = user;

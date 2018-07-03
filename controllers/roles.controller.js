@@ -61,7 +61,7 @@ let role = {
 			})
 			.catch(err => {
 				console.log(err);
-				res.status(400).json({ err: 'eroro' });
+				res.status(400).json({ err: 'error deleting from database' });
 			});
 	},
 };

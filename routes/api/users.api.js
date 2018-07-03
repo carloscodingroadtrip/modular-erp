@@ -15,25 +15,26 @@ const User = require('../../controllers/user.controller');
 const validateRegisterInput = require('../../validations/register-user');
 const validateLoginInput = require('../../validations/login');
 
-/**
-* Post routes
-*/
-//@route    GET api /users/getusers
-//@desc     Get  allusers
-//@access   Public
+/**************************************************
+// * POST routes
+****************************************************/
+//@route    POST api/users/register
+//@desc     Register a user
+//@access   Private
 router.post('/register', (req, res) => {
 	//Check Validation
 	const { errors, isValid } = validateRegisterInput(req.body);
 	if (!isValid) {
 		return res.status(400).json(errors);
 	}
-
+	//Get the avatar associated with the email
 	const avatar = gravatar.url(req.body.email, {
 		s: '200', //size
 		r: 'pg', //rating
 		d: 'mm', //default
 	});
 
+	//Create the user object
 	let newuser = {
 		user_name: req.body.name,
 		user_email: req.body.email,
@@ -42,12 +43,16 @@ router.post('/register', (req, res) => {
 		RoleId: parseInt(req.body.role),
 	};
 
+	//Encrypt the password
 	bcrypt.genSalt(10, (err, salt) => {
 		bcrypt.hash(newuser.user_password + 'egf', salt, (err, hash) => {
 			if (err) throw err;
-			newuser.user_password = hash;
+			newuser.user_password = hash; //Assign the new hash to the password
+			//Check if the user exists
 			User.findUser(newuser)
 				.then(data => {
+					//If the user does NOT exists,
+					//Save the user and return the JSON object
 					if (data === null) {
 						User.saveUser(newuser)
 							.then(user => {
@@ -55,6 +60,7 @@ router.post('/register', (req, res) => {
 							})
 							.catch(err => JSON.stringify(err));
 					} else {
+						//If the user exist, send an error.
 						res.status(400).json({ err: 'Error, user already exists.' });
 					}
 				})
@@ -65,9 +71,12 @@ router.post('/register', (req, res) => {
 	});
 });
 
-//@route    GET api /users/getusers
+/**************************************************
+* GET routes
+***************************************************/
+//@route    GET api/users/getusers
 //@desc     Get  allusers
-//@access   Public
+// @access   Private
 router.get('/getusers', (req, res) => {
 	User.getUsers()
 		.then(user => {
@@ -75,6 +84,22 @@ router.get('/getusers', (req, res) => {
 		})
 		.catch(err => {
 			res.status(404).json(err);
+		});
+});
+
+//@route    DELETE api/users/deleteuser
+//@desc     Delete a user
+// @access  Private
+router.delete('/deleteuser', (req, res) => {
+	let deleteuser = {
+		id: parseInt(req.body.id),
+	};
+	User.deleteUser(deleteuser)
+		.then(user => {
+			res.status(200).json(user);
+		})
+		.catch(err => {
+			res.status(400).json(err);
 		});
 });
 
