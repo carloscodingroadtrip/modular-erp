@@ -1,15 +1,38 @@
+global.__basedir = __dirname;
+const http = require('http');
 const express = require('express');
 const router = express.Router();
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const path = require('path');
 const app = express();
+
+//Load routes
+const users = require('./routes/api/users.api');
+const customers = require('./routes/api/customers.api');
+const products = require('./routes/api/products.api');
+const orders = require('./routes/api/orders.api');
+const roles = require('./routes/api/roles.api');
 
 //Load database models
 const db = require('./models');
 
-app.use('/', (req, res) => {
-	res.send('home page');
-});
+//bodyparser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-//Fire app the server
+// -------------------------------------------- method Override middleware
+app.use(methodOverride('_method'));
+
+//Use routes
+app.use('/api/users', users);
+app.use('/api/customers', customers);
+app.use('/api/products', products);
+app.use('/api/orders', orders);
+app.use('/api/roles', roles);
+
+//Fire up the server
 const port = process.env.PORT || 5000;
 
 db.sequelize.sync({ force: true }).then(() => {

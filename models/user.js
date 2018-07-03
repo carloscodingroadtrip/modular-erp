@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-	var user = sequelize.define(
-		'user',
+	var User = sequelize.define(
+		'User',
 		{
 			id: {
 				type: DataTypes.INTEGER(3),
@@ -15,10 +15,14 @@ module.exports = (sequelize, DataTypes) => {
 			user_email: {
 				type: DataTypes.STRING(50),
 				allowNull: false,
+				unique: true,
 			},
-			user_pass: {
-				type: DataTypes.STRING(15),
+			user_password: {
+				type: DataTypes.STRING(200),
 				allowNull: false,
+			},
+			avatar: {
+				type: DataTypes.STRING,
 			},
 		},
 		{
@@ -26,9 +30,14 @@ module.exports = (sequelize, DataTypes) => {
 			timestamps: false,
 		}
 	);
-	user.associate = function(models) {
-		user.belongsTo(models.role);
+
+	User.associate = function(models) {
+		User.belongsTo(models.Role, {
+			foreignKey: {
+				allowNull: false,
+			},
+		});
 	};
 
-	return user;
+	return User;
 };
