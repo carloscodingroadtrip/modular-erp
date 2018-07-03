@@ -12,21 +12,25 @@ let user = {
 		return found;
 	},
 	saveUser: values => {
-		let savedUser = db.User
-			.create(values, {
-				include: [
-					{
-						model: db.Role,
-					},
-				],
-			})
-			.then(data => data)
-			.catch(err => {
-				console.log(err);
-				JSON.stringify(err);
-			});
-
-		return savedUser;
+		return db.Role.findById(values.RoleId).then(data => {
+			if (data !== null) {
+				return db.User
+					.create(values, {
+						include: [
+							{
+								model: db.Role,
+							},
+						],
+					})
+					.then(data => data)
+					.catch(err => {
+						console.log(err);
+						JSON.stringify(err);
+					});
+			} else {
+				return { error: 'Trying to assing an incorrect role.' };
+			}
+		});
 	},
 
 	getUsers: async () => {
