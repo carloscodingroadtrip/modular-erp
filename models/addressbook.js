@@ -1,32 +1,29 @@
 module.exports = (sequelize, DataTypes) => {
-	var Role = sequelize.define(
-		'Role',
+	var AddressBook = sequelize.define(
+		'AddressBook',
 		{
 			id: {
-				type: DataTypes.INTEGER(2),
+				type: DataTypes.INTEGER,
 				primaryKey: true,
 				allowNull: false,
 				autoIncrement: true,
 			},
-			role_name: {
+			address: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
 		},
 		{
 			freezeTableName: true,
-			timestamps: false,
+			timestamps: true,
 		}
 	);
-
-	Role.associate = function(models) {
-		Role.hasMany(models.User, {
-			as: 'roles',
+	AddressBook.associate = function(models) {
+		AddressBook.belongsTo(models.Customer, {
 			foreignKey: {
 				allowNull: false,
 			},
 		});
 	};
-
-	return Role;
+	return AddressBook;
 };
