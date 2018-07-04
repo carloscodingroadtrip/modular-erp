@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
 		return res.status(400).json(errors);
 	}
 	let newrole = {
-		role_name: req.body.role,
+		role_name: req.body.role.toLowerCase(),
 	};
 	Role.findRole(newrole)
 		.then(data => {

@@ -7,7 +7,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
-
+const isEmpty = require('../../validations/is-empty');
+const Validator = require('validator');
 // Load models
 const User = require('../../controllers/user.controller');
 
@@ -38,7 +39,7 @@ router.post('/register', (req, res) => {
 	//Create the user object
 	let newuser = {
 		user_name: req.body.name,
-		user_email: req.body.email,
+		user_email: req.body.email.toLowerCase(),
 		user_password: req.body.password,
 		avatar: avatar,
 		RoleId: parseInt(req.body.role),
@@ -76,9 +77,9 @@ router.post('/register', (req, res) => {
 * GET routes
 ***************************************************/
 //@route    GET api/users/getusers
-//@desc     Get  allusers
-// @access   Private
-router.get('/getusers', (req, res) => {
+//@desc     Get ALL Users
+//@access   Private
+router.get('/getallusers', (req, res) => {
 	User.getUsers()
 		.then(user => {
 			res.status(200).json(user);
@@ -86,6 +87,31 @@ router.get('/getusers', (req, res) => {
 		.catch(err => {
 			res.status(404).json(err);
 		});
+});
+
+//@route    POST api/users/getusers
+//@desc     Get a single User
+//@access   Private
+router.post('/getuser', (req, res) => {
+	let errors = {};
+	req.body.email = !isEmpty(req.body.email) ? req.body.email : '';
+	if (Validator.isEmpty(req.body.email)) {
+		errors.email = 'Email field is required';
+		res.status(400).json(errors);
+	} else {
+		//Create the user object
+		let user = {
+			user_email: req.body.email,
+		};
+
+		User.findUser(user)
+			.then(user => {
+				res.status(200).json(user);
+			})
+			.catch(err => {
+				res.status(404).json(err);
+			});
+	}
 });
 
 /**************************************************
