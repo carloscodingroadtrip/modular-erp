@@ -67,33 +67,3 @@ let role = {
 };
 
 module.exports = role;
-
-// models.TimesheetItem
-// 	.findById(item.id)
-// 	.then(itemInstance => {
-// 		return itemIstance.update(item).then(self => {
-// 			return self;
-// 		});
-// 	})
-// 	.catch(e => {
-// 		console.log(e);
-// 	});
-
-// models.People.update({OwnerId: peopleInfo.newuser},
-//     {where: {id: peopleInfo.scenario.id}})
-//     .then(function (result) {
-//       models.People.findById(peopleInfo.scenario.id)
-//       .then(function(user){
-//         response(user).code(200);
-// 	  })
-// 	  .catch(function (err) {
-// 		 request.server
-// 		 		.log(['error'], err.stack)
-//        			.code(200);
-//       })
-// 	})
-// 	.catch(function (err) {
-//     	request.server.log(['error'], err.stack);
-// 	})
-//    .code(200);
-// });

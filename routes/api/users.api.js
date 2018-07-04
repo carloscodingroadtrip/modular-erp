@@ -14,6 +14,7 @@ const User = require('../../controllers/user.controller');
 //load Validation
 const validateRegisterInput = require('../../validations/register-user');
 const validateLoginInput = require('../../validations/login');
+const validateUpdatingUser = require('../../validations/update-user');
 
 /**************************************************
 // * POST routes
@@ -87,13 +88,18 @@ router.get('/getusers', (req, res) => {
 		});
 });
 
+/**************************************************
+* DELETE routes
+***************************************************/
 //@route    DELETE api/users/deleteuser
 //@desc     Delete a user
 // @access  Private
 router.delete('/deleteuser', (req, res) => {
+	// Build the user to delete
 	let deleteuser = {
 		id: parseInt(req.body.id),
 	};
+	//Call the method and proceed to delete
 	User.deleteUser(deleteuser)
 		.then(user => {
 			res.status(200).json(user);
@@ -101,6 +107,44 @@ router.delete('/deleteuser', (req, res) => {
 		.catch(err => {
 			res.status(400).json(err);
 		});
+});
+
+/**************************************************
+* PUT routes
+***************************************************/
+//@route    PUT api/users/updateuser
+//@desc     Update a user
+// @access  Private
+router.put('/updateuser', (req, res) => {
+	//Check Validation
+	const { errors, isValid } = validateUpdatingUser(req.body);
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
+	//Create the user object to update
+	let updateuser = {
+		id: req.body.id,
+		user_name: req.body.name,
+		user_password: req.body.password,
+		RoleId: parseInt(req.body.role),
+	};
+
+	//Encrypt the password
+	bcrypt.genSalt(10, (err, salt) => {
+		bcrypt.hash(updateuser.user_password + 'egf', salt, (err, hash) => {
+			if (err) throw err;
+			updateuser.user_password = hash; //Assign the new hash to the password
+			//Check if the user exists
+			User.updateUser(updateuser)
+				.then(updatedRecord => {
+					res.status(200).json(updatedRecord);
+				})
+				.catch(err => {
+					res.json({ error: err.toString() });
+				});
+		});
+	});
 });
 
 module.exports = router;

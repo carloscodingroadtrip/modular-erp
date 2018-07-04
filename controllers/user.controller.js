@@ -46,7 +46,7 @@ let user = {
 		return db.User
 			.findById(user.id)
 			.then(userToDelete => {
-				console.log(userToDelete);
+				// null will be returned if user was not found
 				if (userToDelete !== null) {
 					return userToDelete.destroy(user).then(deleted => {
 						return { success: 'User has been deleted.' };
@@ -58,6 +58,27 @@ let user = {
 			.catch(err => {
 				console.log(err);
 				res.status(400).json({ err: 'error deleting from database' });
+			});
+	},
+	updateUser: user => {
+		return db.User
+			.findById(user.id)
+			.then(userToUpdate => {
+				if (userToUpdate !== null) {
+					return userToUpdate
+						.update(user, {
+							include: [{ model: db.Role }],
+						})
+						.then(finalUpdatedUser => {
+							return finalUpdatedUser;
+						});
+				} else {
+					return { error: 'User does not exist.' };
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).json({ err: 'error updating record.' });
 			});
 	},
 };
