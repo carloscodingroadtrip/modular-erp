@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 	AddressBook.associate = function(models) {
-		AddressBook.belongsTo(models.Customer, { constraints: true });
+		AddressBook.belongsTo(models.Customer, {
+			onUpdate: 'CASCADE',
+			onDelete: 'CASCADE',
+		});
 	};
 	return AddressBook;
 };

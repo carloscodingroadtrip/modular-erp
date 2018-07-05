@@ -49,6 +49,8 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	Customer.associate = function(models) {
 		Customer.hasMany(models.AddressBook, {
+			onUpdate: 'CASCADE',
+			onDelete: 'CASCADE',
 			as: 'addresses',
 			allowNull: false,
 		});

@@ -134,4 +134,23 @@ router.put('/updatecustomer', (req, res) => {
 		});
 });
 
+/*********************************
+* DELETE routes
+*********************************/
+//@route    DELETE api/roles/updaterole
+//@desc     Delete a role
+//@access   PRIVATE
+router.delete('/deletecustomer/:id', (req, res) => {
+	let deletecustomer = {
+		id: parseInt(req.params.id),
+	};
+	Customer.deleteCustomer(deletecustomer)
+		.then(data => {
+			res.status(200).json(data);
+		})
+		.catch(err => {
+			res.status(400).json(err);
+		});
+});
+
 module.exports = router;

@@ -33,7 +33,9 @@ let customer = {
 	},
 	deleteCustomer: customer => {
 		return db.Customer
-			.findById(customer.id)
+			.findById(customer.id, {
+				include: [{ model: db.AddressBook, as: 'addresses' }],
+			})
 			.then(customerToDelete => {
 				// null will be returned if user was not found
 				if (customerToDelete !== null) {
