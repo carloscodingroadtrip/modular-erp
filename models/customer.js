@@ -11,17 +11,34 @@ module.exports = (sequelize, DataTypes) => {
 			cust_name: {
 				type: DataTypes.STRING,
 				allownull: false,
+				unique: true,
+			},
+			cust_hascredit: {
+				type: DataTypes.BOOLEAN,
+				allownull: false,
+				defaultValue: false,
+			},
+			cust_creditline: {
+				type: DataTypes.FLOAT,
+				allownull: true,
+				defaultValue: 0,
+			},
+			cust_balance: {
+				type: DataTypes.FLOAT,
+				allownull: true,
+				defaultValue: 0,
 			},
 			cust_email: {
 				type: DataTypes.STRING,
 				allownull: true,
+				defaultValue: 'no_email@email.com',
 			},
 			cust_phone: {
-				type: DataTypes.INTEGER(),
+				type: DataTypes.STRING(20),
 				allownull: true,
 			},
 			cust_fax: {
-				type: DataTypes.INTEGER(),
+				type: DataTypes.STRING(20),
 				allownull: true,
 			},
 		},
@@ -32,10 +49,8 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	Customer.associate = function(models) {
 		Customer.hasMany(models.AddressBook, {
-			as: 'customers',
-			foreignKey: {
-				allowNull: false,
-			},
+			as: 'addresses',
+			allowNull: false,
 		});
 	};
 	return Customer;

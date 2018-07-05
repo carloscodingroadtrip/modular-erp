@@ -19,11 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 	AddressBook.associate = function(models) {
-		AddressBook.belongsTo(models.Customer, {
-			foreignKey: {
-				allowNull: false,
-			},
-		});
+		AddressBook.belongsTo(models.Customer);
 	};
 	return AddressBook;
 };
