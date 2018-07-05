@@ -49,20 +49,20 @@ let customer = {
 				res.status(400).json({ err: 'error deleting from database' });
 			});
 	},
-	updateCustomer: user => {
-		return db.User
-			.findById(user.id)
-			.then(userToUpdate => {
-				if (userToUpdate !== null) {
-					return userToUpdate
-						.update(user, {
-							include: [{ model: db.Role }],
+	updateCustomer: customer => {
+		return db.Customer
+			.findById(customer.id)
+			.then(customerToUpdate => {
+				if (customerToUpdate !== null) {
+					return customerToUpdate
+						.update(customer, {
+							include: [{ model: db.AddressBook, as: 'addresses' }],
 						})
-						.then(finalUpdatedUser => {
-							return finalUpdatedUser;
+						.then(finalUpdatedCustomer => {
+							return finalUpdatedCustomer;
 						});
 				} else {
-					return { error: 'User does not exist.' };
+					return { error: 'Customer does not exist.' };
 				}
 			})
 			.catch(err => {

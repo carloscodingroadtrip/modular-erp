@@ -83,4 +83,17 @@ router.get('/getcustomer/:name', (req, res) => {
 		});
 });
 
+//@route    GET api/customers/getallcustomers
+//@desc     Get all customers info by name
+//@access   Private
+router.get('/getallcustomers', (req, res) => {
+	Customer.getAllCustomers()
+		.then(customers => {
+			res.status(200).json(customers);
+		})
+		.catch(err => {
+			res.status(404).json(err);
+		});
+});
+
 module.exports = router;
