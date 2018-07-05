@@ -51,12 +51,20 @@ let customer = {
 	},
 	updateCustomer: customer => {
 		return db.Customer
-			.findById(customer.id)
+			.findById(customer.id, {
+				include: [{ model: db.AddressBook, as: 'addresses' }],
+			})
 			.then(customerToUpdate => {
 				if (customerToUpdate !== null) {
 					return customerToUpdate
 						.update(customer, {
-							include: [{ model: db.AddressBook, as: 'addresses' }],
+							where: { id: customer.id },
+							include: [
+								{
+									model: db.AddressBook,
+									as: 'addresses',
+								},
+							],
 						})
 						.then(finalUpdatedCustomer => {
 							return finalUpdatedCustomer;

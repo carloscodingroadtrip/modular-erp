@@ -67,7 +67,7 @@ router.post('/register', (req, res) => {
 /**************************************************
 // * GET routes
 ****************************************************/
-//@route    GET api/customers/findbyname
+//@route    GET api/customers/:name
 //@desc     Get a customer info by name
 //@access   Private
 router.get('/getcustomer/:name', (req, res) => {
@@ -93,6 +93,44 @@ router.get('/getallcustomers', (req, res) => {
 		})
 		.catch(err => {
 			res.status(404).json(err);
+		});
+});
+
+/*********************************
+* PUT routes
+*********************************/
+//@route    PUT api/customers/updatecustomer
+//@desc     Update a customer
+//@access   PRIVATE
+router.put('/updatecustomer', (req, res) => {
+	//Check Validation
+	const { errors, isValid } = validateCustomerInput(req.body);
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
+	//Create the user object
+	let updateCustomer = {
+		id: req.body.id,
+		cust_name: req.body.name.toUpperCase(),
+		cust_hascredit: req.body.hascredit,
+		cust_creditline: req.body.creditline,
+		cust_email: req.body.email.toLowerCase(),
+		cust_phone: req.body.phone,
+		cust_fax: req.body.fax,
+		addresses: [
+			{
+				address: req.body.address.toUpperCase(),
+			},
+		],
+	};
+
+	Customer.updateCustomer(updateCustomer)
+		.then(newupdatedcustomer => {
+			res.status(200).json(newupdatedcustomer);
+		})
+		.catch(err => {
+			res.status(400).json(err);
 		});
 });
 

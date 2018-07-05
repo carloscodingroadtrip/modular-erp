@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 	AddressBook.associate = function(models) {
-		AddressBook.belongsTo(models.Customer);
+		AddressBook.belongsTo(models.Customer, { constraints: true });
 	};
 	return AddressBook;
 };
