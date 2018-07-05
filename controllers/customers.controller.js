@@ -6,7 +6,7 @@ let db = require(path.join(__basedir, '/models'));
 let customer = {
 	findCustomer: values => {
 		let found = db.Customer
-			.findOne({ where: { cust_name: values.cust_name } })
+			.findOne({ where: { cust_name: values.cust_name }, include: [{ model: db.AddressBook, as: 'addresses' }] })
 			.then(data => data)
 			.catch(err => console.log(err));
 		return found;
@@ -21,26 +21,27 @@ let customer = {
 					},
 				],
 			})
-			.then(data => data);
+			.then(data => data)
+			.catch(err => err);
 	},
 	getAllCustomers: async () => {
-		let user = new Controller('User');
-		return user
+		let customer = new Controller('Customer');
+		return customer
 			.getData()
-			.then(data => data)
+			.then(customer => customer)
 			.catch(err => JSON.stringify(err));
 	},
-	deleteCustomer: user => {
-		return db.User
-			.findById(user.id)
-			.then(userToDelete => {
+	deleteCustomer: customer => {
+		return db.Customer
+			.findById(customer.id)
+			.then(customerToDelete => {
 				// null will be returned if user was not found
-				if (userToDelete !== null) {
-					return userToDelete.destroy(user).then(deleted => {
-						return { success: 'User has been deleted.' };
+				if (customerToDelete !== null) {
+					return customerToDelete.destroy(customer).then(deleted => {
+						return { success: 'Customer has been deleted.' };
 					});
 				} else {
-					return { error: 'User does not exist' };
+					return { error: 'Customer does not exist' };
 				}
 			})
 			.catch(err => {

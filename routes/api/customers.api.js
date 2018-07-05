@@ -18,7 +18,7 @@ const validateCustomerInput = require('../../validations/register-cust');
 // * POST routes
 ****************************************************/
 //@route    POST api/customers/register
-//@desc     Register a customer
+//@desc     Register a customer and billing address
 //@access   Private
 router.post('/register', (req, res) => {
 	//Check Validation
@@ -29,38 +29,57 @@ router.post('/register', (req, res) => {
 
 	//Create the user object
 	let newcustomer = {
-		cust_name: req.body.name,
+		cust_name: req.body.name.toUpperCase(),
 		cust_hascredit: req.body.hascredit,
 		cust_creditline: req.body.creditline,
 		cust_balance: req.body.balance,
-		cust_email: req.body.email,
+		cust_email: req.body.email.toLowerCase(),
 		cust_phone: req.body.phone,
 		cust_fax: req.body.fax,
 		addresses: [
 			{
-				address: req.body.address,
+				address: req.body.address.toUpperCase(),
 			},
 		],
 	};
 
+	//Check to see if customer already exists
 	Customer.findCustomer(newcustomer)
 		.then(data => {
-			console.log(data);
-			//If the user does NOT exists,
-			//Save the user and return the JSON object
 			if (data === null) {
+				// Null = customer does not exists
+				//We will continue and save the customer
 				Customer.saveCustomer(newcustomer)
 					.then(customer => {
 						res.status(200).json(customer);
 					})
 					.catch(err => JSON.stringify(err));
 			} else {
-				//If the user exist, send an error.
+				//Else, If the customer exists, send an error.
 				res.status(400).json({ err: 'Error, customer already exists.' });
 			}
 		})
 		.catch(err => {
-			res.json({ error: err.toString() });
+			res.status(400).json({ error: err.toString() });
+		});
+});
+
+/**************************************************
+// * GET routes
+****************************************************/
+//@route    GET api/customers/findbyname
+//@desc     Get a customer info by name
+//@access   Private
+router.get('/getcustomer/:name', (req, res) => {
+	let customer = {
+		cust_name: req.params.name,
+	};
+	Customer.findCustomer(customer)
+		.then(customer => {
+			res.status(200).json(customer);
+		})
+		.catch(err => {
+			res.status(404).json(err);
 		});
 });
 
