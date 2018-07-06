@@ -76,7 +76,6 @@ let customer = {
 			})
 			.then(addressToUpdate => {
 				if (addressToUpdate !== null) {
-					console.log('inside updatedCustomerAddress', addressToUpdate);
 					return addressToUpdate.update(address).then(finalUpdatedCustomerAddress => {
 						return finalUpdatedCustomerAddress;
 					});
@@ -89,6 +88,12 @@ let customer = {
 				res.status(400).json({ err: 'error updating record.' });
 			});
 		return { customer: updatedCustomer, address: updatedCustomerAddress };
+	},
+	addAddress: address => {
+		return db.AddressBook
+			.create(address)
+			.then(data => data)
+			.catch(err => err);
 	},
 };
 

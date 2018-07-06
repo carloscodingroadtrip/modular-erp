@@ -56,14 +56,29 @@ router.post('/register', (req, res) => {
 					.catch(err => JSON.stringify(err));
 			} else {
 				//Else, If the customer exists, send an error.
-				res.status(400).json({ err: 'Error, customer already exists.' });
+				res.status(400).json({ err: 'Error, customer already exist.' });
 			}
 		})
 		.catch(err => {
 			res.status(400).json({ error: err.toString() });
 		});
 });
-
+//@route    POST api/customers/addaddress
+//@desc     Add additional address to customer
+//@access   Private
+router.post('/addaddress', (req, res) => {
+	let additionaladdress = {
+		address: req.body.address,
+		CustomerId: req.body.customerid,
+	};
+	Customer.addAddress(additionaladdress)
+		.then(address => {
+			res.status(200).json(address);
+		})
+		.catch(err => {
+			res.status(400).json({ error: 'customer does not exist.' });
+		});
+});
 /**************************************************
 // * GET routes
 ****************************************************/
