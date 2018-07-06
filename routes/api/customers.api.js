@@ -115,7 +115,7 @@ router.get('/getallcustomers', (req, res) => {
 * PUT routes
 *********************************/
 //@route    PUT api/customers/updatecustomer
-//@desc     Update a customer
+//@desc     Update a customer (Cust info plus main address)
 //@access   PRIVATE
 router.put('/updatecustomer', (req, res) => {
 	//Check Validation
@@ -143,6 +143,24 @@ router.put('/updatecustomer', (req, res) => {
 	Customer.updateCustomer(updateCustomer, updateAddress)
 		.then(newupdatedcustomer => {
 			res.status(200).json(newupdatedcustomer);
+		})
+		.catch(err => {
+			res.status(400).json(err);
+		});
+});
+
+//@route    PUT api/customers/updateaddress
+//@desc     Update a customer's address
+//@access   PRIVATE
+router.put('/updateaddress', (req, res) => {
+	let updateAddress = {
+		addressId: req.body.addressid,
+		address: req.body.address.toUpperCase(),
+	};
+
+	Customer.updateAddress(updateAddress)
+		.then(updatedAddress => {
+			res.status(200).json(updatedAddress);
 		})
 		.catch(err => {
 			res.status(400).json(err);

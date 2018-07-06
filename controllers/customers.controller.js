@@ -95,6 +95,25 @@ let customer = {
 			.then(data => data)
 			.catch(err => err);
 	},
+	updateAddress: address => {
+		return db.AddressBook
+			.findById(address.addressId, {
+				where: { addressId: address.addressId },
+			})
+			.then(addressToUpdate => {
+				if (addressToUpdate !== null) {
+					return addressToUpdate.update(address).then(finalUpdatedAddress => {
+						return finalUpdatedAddress;
+					});
+				} else {
+					return { error: 'Address does not exist.' };
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).json({ err: 'error updating record.' });
+			});
+	},
 };
 
 module.exports = customer;
