@@ -71,8 +71,8 @@ let customer = {
 			});
 
 		const updatedCustomerAddress = await db.AddressBook
-			.findById(customer.id, {
-				where: { CustomerId: customer.id },
+			.findById(address.addressId, {
+				where: { addressId: address.addressId },
 			})
 			.then(addressToUpdate => {
 				if (addressToUpdate !== null) {
@@ -88,45 +88,8 @@ let customer = {
 				console.log(err);
 				res.status(400).json({ err: 'error updating record.' });
 			});
-		return { updatedCustomer, updatedCustomerAddress };
+		return { customer: updatedCustomer, address: updatedCustomerAddress };
 	},
-	// return updatedCustomer, updatedCustomerAddress;
-	// },
-	// 	customer => {
-	// 	return db.Customer
-	// 		.findById(customer.id, {
-	// 			where: { CustomerId: customer.id },
-	// 			include: [
-	// 				{
-	// 					model: db.AddressBook,
-	// 					as: 'addresses',
-	// 				},
-	// 			],
-	// 		})
-	// 		.then(customerToUpdate => {
-	// 			if (customerToUpdate !== null) {
-	// 				return customerToUpdate
-	// 					.update(customer, {
-	// 						include: [
-	// 							{
-	// 								model: db.AddressBook,
-	// 								as: 'addresses',
-	// 								where: { CustomerId: customer.id },
-	// 							},
-	// 						],
-	// 					})
-	// 					.then(finalUpdatedCustomer => {
-	// 						return finalUpdatedCustomer;
-	// 					});
-	// 			} else {
-	// 				return { error: 'Customer does not exist.' };
-	// 			}
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 			res.status(400).json({ err: 'error updating record.' });
-	// 		});
-	// },
 };
 
 module.exports = customer;

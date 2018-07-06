@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
 	var AddressBook = sequelize.define(
 		'AddressBook',
 		{
-			id: {
+			addressId: {
 				type: DataTypes.INTEGER,
 				primaryKey: true,
 				allowNull: false,

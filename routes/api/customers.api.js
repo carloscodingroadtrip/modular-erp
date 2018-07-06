@@ -121,6 +121,7 @@ router.put('/updatecustomer', (req, res) => {
 	};
 
 	let updateAddress = {
+		addressId: req.body.addressid,
 		address: req.body.address.toUpperCase(),
 	};
 
