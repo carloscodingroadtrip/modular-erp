@@ -51,34 +51,16 @@ let customer = {
 				res.status(400).json({ err: 'error deleting from database' });
 			});
 	},
-	updateCustomer: customer => {
-		return db.Customer
+	updateCustomer: async function executeUpdate(customer, address) {
+		const updatedCustomer = await db.Customer
 			.findById(customer.id, {
 				where: { CustomerId: customer.id },
-
-				include: [
-					{
-						model: db.AddressBook,
-						as: 'addresses',
-					},
-				],
 			})
 			.then(customerToUpdate => {
 				if (customerToUpdate !== null) {
-					return customerToUpdate
-						.update(customer, {
-							where: { CustomerId: customer.id },
-
-							include: [
-								{
-									model: db.AddressBook,
-									as: 'addresses',
-								},
-							],
-						})
-						.then(finalUpdatedCustomer => {
-							return finalUpdatedCustomer;
-						});
+					return customerToUpdate.update(customer).then(finalUpdatedCustomer => {
+						return finalUpdatedCustomer;
+					});
 				} else {
 					return { error: 'Customer does not exist.' };
 				}
@@ -87,7 +69,64 @@ let customer = {
 				console.log(err);
 				res.status(400).json({ err: 'error updating record.' });
 			});
+
+		const updatedCustomerAddress = await db.AddressBook
+			.findById(customer.id, {
+				where: { CustomerId: customer.id },
+			})
+			.then(addressToUpdate => {
+				if (addressToUpdate !== null) {
+					console.log('inside updatedCustomerAddress', addressToUpdate);
+					return addressToUpdate.update(address).then(finalUpdatedCustomerAddress => {
+						return finalUpdatedCustomerAddress;
+					});
+				} else {
+					return { error: 'Address does not exist.' };
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).json({ err: 'error updating record.' });
+			});
+		return { updatedCustomer, updatedCustomerAddress };
 	},
+	// return updatedCustomer, updatedCustomerAddress;
+	// },
+	// 	customer => {
+	// 	return db.Customer
+	// 		.findById(customer.id, {
+	// 			where: { CustomerId: customer.id },
+	// 			include: [
+	// 				{
+	// 					model: db.AddressBook,
+	// 					as: 'addresses',
+	// 				},
+	// 			],
+	// 		})
+	// 		.then(customerToUpdate => {
+	// 			if (customerToUpdate !== null) {
+	// 				return customerToUpdate
+	// 					.update(customer, {
+	// 						include: [
+	// 							{
+	// 								model: db.AddressBook,
+	// 								as: 'addresses',
+	// 								where: { CustomerId: customer.id },
+	// 							},
+	// 						],
+	// 					})
+	// 					.then(finalUpdatedCustomer => {
+	// 						return finalUpdatedCustomer;
+	// 					});
+	// 			} else {
+	// 				return { error: 'Customer does not exist.' };
+	// 			}
+	// 		})
+	// 		.catch(err => {
+	// 			console.log(err);
+	// 			res.status(400).json({ err: 'error updating record.' });
+	// 		});
+	// },
 };
 
 module.exports = customer;

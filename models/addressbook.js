@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 		AddressBook.belongsTo(models.Customer, {
 			onUpdate: 'CASCADE',
 			onDelete: 'CASCADE',
+			foreignKey: 'CustomerId',
 		});
 	};
 	return AddressBook;

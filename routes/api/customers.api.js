@@ -118,15 +118,13 @@ router.put('/updatecustomer', (req, res) => {
 		cust_email: req.body.email.toLowerCase(),
 		cust_phone: req.body.phone,
 		cust_fax: req.body.fax,
-		addresses: [
-			{
-				address: req.body.address.toUpperCase(),
-				CustomerId: parseInt(req.body.id),
-			},
-		],
 	};
 
-	Customer.updateCustomer(updateCustomer)
+	let updateAddress = {
+		address: req.body.address.toUpperCase(),
+	};
+
+	Customer.updateCustomer(updateCustomer, updateAddress)
 		.then(newupdatedcustomer => {
 			res.status(200).json(newupdatedcustomer);
 		})

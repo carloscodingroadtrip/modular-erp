@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
 		Customer.hasMany(models.AddressBook, {
 			onUpdate: 'CASCADE',
 			onDelete: 'CASCADE',
+			foreignKey: 'CustomerId',
 			as: 'addresses',
 			allowNull: false,
 		});
