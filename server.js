@@ -13,6 +13,7 @@ const users = require('./routes/api/users.api');
 const customers = require('./routes/api/customers.api');
 const products = require('./routes/api/products.api');
 const orders = require('./routes/api/orders.api');
+const status = require('./routes/api/status.api');
 const roles = require('./routes/api/roles.api');
 
 //Load database models
@@ -31,6 +32,7 @@ app.use('/api/customers', customers);
 app.use('/api/products', products);
 app.use('/api/orders', orders);
 app.use('/api/roles', roles);
+app.use('/api/status', status);
 
 //Fire up the server
 const port = process.env.PORT || 5000;
