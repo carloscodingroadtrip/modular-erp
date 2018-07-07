@@ -32,11 +32,7 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 	Order.associate = function(models) {
-		Order.belongsTo(models.Customer, {
-			foreignKey: {
-				allowNull: false,
-			},
-		});
+		Order.belongsTo(models.Customer);
 	};
 	return Order;
 };
