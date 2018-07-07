@@ -52,32 +52,37 @@ let customer = {
 			});
 	},
 	updateCustomer: async function executeUpdate(customer, address) {
+		//Get the Customer to update
 		const updatedCustomer = await db.Customer
 			.findById(customer.id, {
 				where: { CustomerId: customer.id },
 			})
 			.then(customerToUpdate => {
 				if (customerToUpdate !== null) {
+					//If we have the customer
+					//Continue and update the customer
 					return customerToUpdate.update(customer).then(finalUpdatedCustomer => {
-						return finalUpdatedCustomer;
+						return finalUpdatedCustomer; //send back the updated customer
 					});
 				} else {
 					return { error: 'Customer does not exist.' };
 				}
 			})
 			.catch(err => {
-				console.log(err);
+				//Send the status, and an error
 				res.status(400).json({ err: 'error updating record.' });
 			});
-
+		//Get the address related to the customer
 		const updatedCustomerAddress = await db.AddressBook
 			.findById(address.addressId, {
 				where: { addressId: address.addressId },
 			})
 			.then(addressToUpdate => {
 				if (addressToUpdate !== null) {
+					//if we have the address
+					//continue and update the address
 					return addressToUpdate.update(address).then(finalUpdatedCustomerAddress => {
-						return finalUpdatedCustomerAddress;
+						return finalUpdatedCustomerAddress; //send back the updated address
 					});
 				} else {
 					return { error: 'Address does not exist.' };
@@ -87,6 +92,7 @@ let customer = {
 				console.log(err);
 				res.status(400).json({ err: 'error updating record.' });
 			});
+		//build a new object, and return it
 		return { customer: updatedCustomer, address: updatedCustomerAddress };
 	},
 	addAddress: address => {

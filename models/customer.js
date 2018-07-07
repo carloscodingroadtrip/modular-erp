@@ -47,14 +47,32 @@ module.exports = (sequelize, DataTypes) => {
 			timestamps: true,
 		}
 	);
+
 	Customer.associate = function(models) {
 		Customer.hasMany(models.AddressBook, {
 			onUpdate: 'CASCADE',
 			onDelete: 'CASCADE',
 			foreignKey: 'CustomerId',
 			as: 'addresses',
+			constraints: false,
+			allowNull: false,
+		});
+		Customer.hasMany(models.Order, {
+			onUpdate: 'CASCADE',
+			onDelete: 'CASCADE',
+			foreignKey: 'CustomerId',
+			as: 'order',
+			constraints: false,
+			allowNull: false,
+		});
+		Customer.hasMany(models.Price, {
+			onUpdate: 'CASCADE',
+			onDelete: 'CASCADE',
+			foreignKey: 'CustomerId',
+			constraints: false,
 			allowNull: false,
 		});
 	};
+
 	return Customer;
 };
