@@ -34,7 +34,7 @@ router.post('/register', (req, res) => {
 	};
 
 	Status.findStatus(newstatus).then(data => {
-		if (data === null) {
+		if (data === null || (typeof data === 'object' && Object.keys(data).length === 0) || data.length === 0) {
 			//status does not exist
 			Status.saveStatus(newstatus)
 				.then(status => {
@@ -42,13 +42,29 @@ router.post('/register', (req, res) => {
 				})
 				.catch(err => {
 					console.log(err);
-					res.status(400).json({ err: 'Error saving to the database. ' });
+					res.status(400).json({ err: 'Error, no data found in the db. ' });
 				});
 		} else {
 			//Else, if the status exist, send an error.
 			res.status(400).json({ err: 'Error, that status already exist.' });
 		}
 	});
+});
+
+/**************************************************
+// * GET routes
+****************************************************/
+//@route    GET api/status/getallstatus
+//@desc     Get all statuses
+//@access   Private
+router.get('/getall', (req, res) => {
+	Status.getAllStatus()
+		.then(status => {
+			res.status(200).json(status);
+		})
+		.catch(err => {
+			res.status(400).json({ err: 'No status exist in the database.' });
+		});
 });
 
 module.exports = router;
