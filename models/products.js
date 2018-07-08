@@ -12,13 +12,16 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING(250),
 				allowNull: false,
 			},
-			who: {
-				type: DataTypes.STRING(200),
+			whoCreated: {
+				type: DataTypes.STRING(30),
+			},
+			whoUpdated: {
+				type: DataTypes.STRING(30),
 			},
 		},
 		{
 			freezeTableName: true,
-			timestamps: false,
+			timestamps: true,
 		}
 	);
 

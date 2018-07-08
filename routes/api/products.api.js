@@ -30,7 +30,7 @@ router.post('/register', (req, res) => {
 	let newproduct = {
 		productId: req.body.id.toLowerCase(),
 		desc: req.body.desc.toUpperCase(),
-		who: req.body.who.toLowerCase(),
+		whoCreated: req.body.who.toUpperCase(),
 	};
 
 	Product.findProduct(newproduct).then(product => {
@@ -59,12 +59,13 @@ router.post('/register', (req, res) => {
 //@desc     Update a product
 //@access   Private
 router.put('/update', (req, res) => {
-	if (isEmpty(req.body)) {
-		res.status(500).json({ error: 'ProductId and desc are required.' });
+	if (isEmpty(req.body.desc)) {
+		res.status(500).json({ error: 'Product description is required.' });
 	} else {
 		let updateThisProduct = {
 			productId: req.body.id.toLowerCase(),
 			desc: req.body.desc.toUpperCase(),
+			whoUpdated: req.body.who.toUpperCase(),
 		};
 
 		Product.updateProduct(updateThisProduct)

@@ -39,7 +39,6 @@ let product = {
 		return db.Product
 			.findOne({ where: { productId: product.productId } })
 			.then(foundProductToUpdate => {
-				console.log('FOUND', foundProductToUpdate);
 				if (foundProductToUpdate !== null) {
 					return foundProductToUpdate
 						.update(product)
