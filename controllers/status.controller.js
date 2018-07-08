@@ -42,7 +42,7 @@ let status = {
 			})
 			.catch(err => {
 				console.log(err);
-				res.status(400).json({ err: 'eroro' });
+				res.status(400).json({ err: 'error saving to the db.' });
 			});
 	},
 	deleteStatus: status => {

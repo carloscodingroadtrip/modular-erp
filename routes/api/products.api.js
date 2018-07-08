@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
-
+const isEmpty = require('../../validations/is-empty');
 // Load models
 const Product = require('../../controllers/product.controller');
 
@@ -50,6 +50,31 @@ router.post('/register', (req, res) => {
 			res.status(400).json({ err: 'Error, that product already exist.' });
 		}
 	});
+});
+
+/**************************************************
+// * PUT routes
+****************************************************/
+//@route    PUT api/products/update
+//@desc     Update a product
+//@access   Private
+router.put('/update', (req, res) => {
+	if (isEmpty(req.body)) {
+		res.status(500).json({ error: 'ProductId and desc are required.' });
+	} else {
+		let updateThisProduct = {
+			productId: req.body.id.toLowerCase(),
+			desc: req.body.desc.toUpperCase(),
+		};
+
+		Product.updateProduct(updateThisProduct)
+			.then(updatedProduct => {
+				res.status(200).json(updatedProduct);
+			})
+			.catch(err => {
+				res.status(400).json({ err: 'Error updating the product.' });
+			});
+	}
 });
 
 /**************************************************

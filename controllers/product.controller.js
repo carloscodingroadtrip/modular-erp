@@ -37,16 +37,23 @@ let product = {
 	},
 	updateProduct: product => {
 		return db.Product
-			.findById(product.id)
-			.then(productToUpdate => {
-				if (productToUpdate !== null) {
-					return productToUpdate.update([product]).then(finalUpdatedProduct => {
-						return finalUpdatedProduct;
-					});
+			.findOne({ where: { productId: product.productId } })
+			.then(foundProductToUpdate => {
+				console.log('FOUND', foundProductToUpdate);
+				if (foundProductToUpdate !== null) {
+					return foundProductToUpdate
+						.update(product)
+						.then(finalUpdatedProduct => finalUpdatedProduct)
+						.catch(err => err);
 				} else {
 					return { error: 'Product does not exist.' };
 				}
 			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).json({ err: 'error saving to the db.' });
+			})
+			.then(updated => updated)
 			.catch(err => {
 				console.log(err);
 				res.status(400).json({ err: 'error getting data from the database' });
