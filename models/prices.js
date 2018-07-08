@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			who: {
-				type: DataTypes.DECIMAL(10, 2),
+				type: DataTypes.STRING,
 				allowNull: false,
 			},
 		},
@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
 			timestamps: true,
 		}
 	);
-
+	Price.associate = function(models) {
+		Price.belongsTo(models.Product, {
+			onUpdate: 'CASCADE',
+			onDelete: 'CASCADE',
+			foreignKey: 'ProductId',
+		});
+	};
 	return Price;
 };

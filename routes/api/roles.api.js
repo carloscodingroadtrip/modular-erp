@@ -12,7 +12,7 @@ const passport = require('passport');
 const Role = require('../../controllers/roles.controller');
 
 //Load validation
-const validateRegisterRole = require('../../validations/role-registration');
+const validateRegisterRole = require('../../validations/register-role');
 
 /*********************************
 * Post routes
@@ -63,7 +63,6 @@ router.put('/updaterole', (req, res) => {
 		})
 		.catch(err => {
 			res.status(400).json(err);
-			// res.status(400).json({ error: err.toString() });
 		});
 });
 

@@ -6,10 +6,14 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING(40),
 				allowNull: false,
 				primaryKey: true,
+				unique: true,
 			},
 			desc: {
 				type: DataTypes.STRING(250),
 				allowNull: false,
+			},
+			who: {
+				type: DataTypes.STRING(200),
 			},
 		},
 		{
@@ -21,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 	Product.associate = function(models) {
 		Product.hasMany(models.Price, {
 			foreignKey: 'ProductId',
+			as: 'pricing',
 			allowNull: false,
 		});
 	};

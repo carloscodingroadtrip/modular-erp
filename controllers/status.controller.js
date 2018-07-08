@@ -28,6 +28,40 @@ let status = {
 			.then(status => status)
 			.catch(err => JSON.stringify(err));
 	},
+	updateStatus: status => {
+		return db.Status
+			.findById(status.id)
+			.then(statusToUpdate => {
+				if (statusToUpdate !== null) {
+					return statusToUpdate.update(status).then(finalUpdatedStatus => {
+						return finalUpdatedStatus;
+					});
+				} else {
+					return { err: 'Status does not exist.' };
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).json({ err: 'eroro' });
+			});
+	},
+	deleteStatus: status => {
+		return db.Status
+			.findById(status.id)
+			.then(statusToDelete => {
+				if (statusToDelete !== null) {
+					return statusToDelete.destroy(status).then(deleted => {
+						return { success: 'Status has been deleted.' };
+					});
+				} else {
+					return { error: 'Status does not exist.' };
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).json({ err: 'Error deleting status from database' });
+			});
+	},
 };
 
 module.exports = status;

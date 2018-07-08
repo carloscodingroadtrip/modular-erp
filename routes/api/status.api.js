@@ -9,11 +9,12 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const isEmpty = require('../../validations/is-empty');
 const Validator = require('validator');
+
 // Load models
 const Status = require('../../controllers/status.controller');
 
 //load Validation
-const validateStatus = require('../../validations/status');
+const validateStatus = require('../../validations/register-status');
 
 /**************************************************
 // * POST routes
@@ -34,15 +35,16 @@ router.post('/register', (req, res) => {
 	};
 
 	Status.findStatus(newstatus).then(data => {
-		if (data === null || (typeof data === 'object' && Object.keys(data).length === 0) || data.length === 0) {
-			//status does not exist
+		if (data === null) {
+			//If data is null, status does not exist
+			//Go ahead and save to the db
 			Status.saveStatus(newstatus)
 				.then(status => {
 					res.status(200).json(status);
 				})
 				.catch(err => {
 					console.log(err);
-					res.status(400).json({ err: 'Error, no data found in the db. ' });
+					res.status(400).json({ err: 'Error, saving to the db. ' });
 				});
 		} else {
 			//Else, if the status exist, send an error.
@@ -55,7 +57,7 @@ router.post('/register', (req, res) => {
 // * GET routes
 ****************************************************/
 //@route    GET api/status/getallstatus
-//@desc     Get all statuses
+//@desc     Get all status
 //@access   Private
 router.get('/getall', (req, res) => {
 	Status.getAllStatus()
@@ -64,6 +66,45 @@ router.get('/getall', (req, res) => {
 		})
 		.catch(err => {
 			res.status(400).json({ err: 'No status exist in the database.' });
+		});
+});
+
+/*********************************
+* PUT routes
+*********************************/
+//@route    PUT api/status/updatestatus
+//@desc     Update a status
+//@access   PRIVATE
+router.put('/updatestatus', (req, res) => {
+	let status = {
+		id: req.body.id,
+		status: req.body.status,
+	};
+	Status.updateStatus(status)
+		.then(newStatus => {
+			res.status(200).json(newStatus);
+		})
+		.catch(err => {
+			res.status(400).json({ err: 'Error updating the status.' });
+		});
+});
+
+/*********************************
+* DELETE routes
+*********************************/
+//@route    DELETE api/roles/updaterole
+//@desc     Delete a role
+//@access   PRIVATE
+router.delete('/deletestatus', (req, res) => {
+	let status = {
+		id: parseInt(req.body.id),
+	};
+	Status.deleteStatus(status)
+		.then(data => {
+			res.status(200).json(data);
+		})
+		.catch(err => {
+			res.status(400).json(err);
 		});
 });
 
