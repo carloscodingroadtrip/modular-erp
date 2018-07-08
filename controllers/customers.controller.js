@@ -6,7 +6,18 @@ let db = require(path.join(__basedir, '/models'));
 let customer = {
 	findCustomer: values => {
 		let found = db.Customer
-			.findOne({ where: { cust_name: values.cust_name }, include: [{ model: db.AddressBook, as: 'addresses' }] })
+			.findOne({
+				where: { cust_name: values.cust_name },
+				include: [
+					{
+						model: db.AddressBook,
+						as: 'addresses',
+					},
+					{
+						model: db.Price,
+					},
+				],
+			})
 			.then(data => data)
 			.catch(err => console.log(err));
 		return found;

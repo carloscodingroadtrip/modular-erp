@@ -38,7 +38,7 @@ app.use('/api/status', status);
 const port = process.env.PORT || 5000;
 
 // { force: true }
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
 	app.listen(port, () => {
 		console.log('App listening on PORT ' + port);
 	});

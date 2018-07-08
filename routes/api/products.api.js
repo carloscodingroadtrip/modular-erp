@@ -7,11 +7,14 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const isEmpty = require('../../validations/is-empty');
+const Validator = require('validator');
 // Load models
 const Product = require('../../controllers/product.controller');
 
 //load Validation
 const validateProduct = require('../../validations/register-product');
+
+const validatePrice = require('../../validations/register-price');
 
 /**************************************************
 // * POST routes
@@ -50,6 +53,34 @@ router.post('/register', (req, res) => {
 			res.status(400).json({ err: 'Error, that product already exist.' });
 		}
 	});
+});
+
+//@route    POST api/products/assign
+//@desc     Assign a single product and price to a customer
+//@access   Private
+router.post('/assign', (req, res) => {
+	//Check Validation
+	const { errors, isValid } = validatePrice(req.body);
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
+	//Create the status object
+	let price = {
+		price: req.body.price,
+		whoCreated: req.body.who,
+		CustomerId: req.body.cust,
+		ProductId: req.body.prodid,
+	};
+
+	Product.assignPrice(price)
+		.then(price => {
+			res.status(200).json(price);
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(400).json({ err: 'Error saving price to the db.' });
+		});
 });
 
 /**************************************************

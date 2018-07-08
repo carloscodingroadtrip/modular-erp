@@ -8,7 +8,6 @@ let product = {
 		let found = db.Product
 			.findOne({ where: { productId: product.productId } })
 			.then(product => {
-				console.log('FOUND', product);
 				if (!product === null) {
 					return { err: 'No such a product in the database.' };
 				} else {
@@ -30,10 +29,6 @@ let product = {
 			.getData()
 			.then(products => products)
 			.catch(err => JSON.stringify(err));
-	},
-	getProductAndPrices: () => {
-		let data = db.Product.findAll({ include: [{ model: db.Price }] });
-		return data;
 	},
 	updateProduct: product => {
 		return db.Product
@@ -58,23 +53,30 @@ let product = {
 				res.status(400).json({ err: 'error getting data from the database' });
 			});
 	},
-	deleteProduct: product => {
-		return db.Product
-			.findById(product.id)
-			.then(productToDelete => {
-				if (productToDelete !== null) {
-					return productToDelete.destroy(product).then(deleted => {
-						return { success: 'Product has been deleted from the database.' };
-					});
+	assignPrice: price => {
+		return db.Price
+			.findOne({
+				where: {
+					CustomerId: price.CustomerId,
+					ProductId: price.ProductId,
+				},
+			})
+			.then(found => {
+				console.log('FOUND', found);
+				if (found === null) {
+					return db.Price
+						.create(price)
+						.then(assignedPrice => assignedPrice)
+						.catch(err => err);
 				} else {
-					return { error: 'Role does not exist.' };
+					return { error: 'This product and price has already been assigned to this customer' };
 				}
 			})
-			.catch(err => {
-				console.log(err);
-				res.status(400).json({ err: 'error deleting from database' });
-			});
+			.catch(err => err);
 	},
+	// updateCustomerPrice: itemToUpdate => {
+	// 	return
+	// }
 };
 
 module.exports = product;

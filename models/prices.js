@@ -12,9 +12,11 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.DECIMAL(10, 2),
 				allowNull: false,
 			},
-			who: {
+			whoCreated: {
 				type: DataTypes.STRING,
-				allowNull: false,
+			},
+			whoUpdated: {
+				type: DataTypes.STRING,
 			},
 		},
 		{
