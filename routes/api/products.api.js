@@ -52,4 +52,20 @@ router.post('/register', (req, res) => {
 	});
 });
 
+/**************************************************
+// * GET routes
+****************************************************/
+//@route    GET api/products/getall
+//@desc     Get all products
+//@access   Private
+router.get('/getall', (req, res) => {
+	Product.getProducts()
+		.then(listofproducts => {
+			res.status(200).json(listofproducts);
+		})
+		.catch(err => {
+			res.status(400).json(err);
+		});
+});
+
 module.exports = router;
