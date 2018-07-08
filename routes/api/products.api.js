@@ -87,7 +87,7 @@ router.post('/assign', (req, res) => {
 // * PUT routes
 ****************************************************/
 //@route    PUT api/products/update
-//@desc     Update a product
+//@desc     Update a product description
 //@access   Private
 router.put('/update', (req, res) => {
 	if (isEmpty(req.body.desc)) {
@@ -107,6 +107,33 @@ router.put('/update', (req, res) => {
 				res.status(400).json({ err: 'Error updating the product.' });
 			});
 	}
+});
+
+//@route    PUT api/products/updateprice
+//@desc     Update a customer's price for a signle product
+//@access   Private
+router.put('/updateprice', (req, res) => {
+	//Check Validation
+	const { errors, isValid } = validatePrice(req.body);
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
+	//Create the status object
+	let updateThisPrice = {
+		price: req.body.price,
+		whoUpdated: req.body.who,
+		CustomerId: req.body.cust,
+		ProductId: req.body.prodid,
+	};
+
+	Product.updateCustomerPrice(updateThisPrice)
+		.then(updatedPrice => {
+			res.status(200).json(updatedPrice);
+		})
+		.catch(err => {
+			res.status(400).json({ err: 'Error updating the product.' });
+		});
 });
 
 /**************************************************

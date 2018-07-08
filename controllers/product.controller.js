@@ -4,6 +4,7 @@ let path = require('path');
 let db = require(path.join(__basedir, '/models'));
 
 let product = {
+	//Find Product by productId
 	findProduct: product => {
 		let found = db.Product
 			.findOne({ where: { productId: product.productId } })
@@ -17,6 +18,7 @@ let product = {
 			.catch(err => console.log(err));
 		return found;
 	},
+	//
 	saveProduct: product => {
 		return db.Product
 			.create(product)
@@ -74,9 +76,30 @@ let product = {
 			})
 			.catch(err => err);
 	},
-	// updateCustomerPrice: itemToUpdate => {
-	// 	return
-	// }
+	updateCustomerPrice: itemToUpdate => {
+		return db.Price
+			.findOne({
+				where: {
+					CustomerId: itemToUpdate.CustomerId,
+					ProductId: itemToUpdate.ProductId,
+				},
+			})
+			.then(found => {
+				if (found !== null) {
+					return found
+						.update(itemToUpdate)
+						.then(finalUpdatedPrice => finalUpdatedPrice)
+						.catch(err => err);
+					c;
+				} else {
+					return {
+						error:
+							'We could not find any data. Please check to see if that product is associated to the customer or vice-versa.',
+					};
+				}
+			})
+			.catch(err => err);
+	},
 };
 
 module.exports = product;
