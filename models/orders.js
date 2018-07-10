@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.DATE,
 				allowNull: false,
 			},
+			note: {
+				type: DataTypes.STRING,
+			},
 			amount: {
 				//To be calculated and then saved to db
 				type: DataTypes.DECIMAL(10, 2),
@@ -56,14 +59,6 @@ module.exports = (sequelize, DataTypes) => {
 			timestamps: true,
 		}
 	);
-	Order.associate = function(models) {
-		Order.belongsTo(models.Customer);
-		Order.hasMany(models.Note, {
-			onUpdate: 'CASCADE',
-			onDelete: 'CASCADE',
-			foreignKey: 'OrderId',
-			as: 'notes',
-		});
-	};
+
 	return Order;
 };

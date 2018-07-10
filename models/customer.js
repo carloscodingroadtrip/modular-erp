@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
 			onDelete: 'CASCADE',
 			foreignKey: 'CustomerId',
 			as: 'addresses',
-			constraints: false,
+			// constraints: false,
 			allowNull: false,
 		});
 		Customer.hasMany(models.Order, {
@@ -62,14 +62,14 @@ module.exports = (sequelize, DataTypes) => {
 			onDelete: 'CASCADE',
 			foreignKey: 'CustomerId',
 			as: 'order',
-			constraints: false,
+			// constraints: false,
 			allowNull: false,
 		});
 		Customer.hasMany(models.Price, {
 			onUpdate: 'CASCADE',
 			onDelete: 'CASCADE',
 			foreignKey: 'CustomerId',
-			constraints: false,
+			// constraints: false,
 			allowNull: false,
 		});
 	};

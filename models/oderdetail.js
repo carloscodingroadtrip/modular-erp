@@ -18,13 +18,13 @@ module.exports = (sequelize, DataTypes) => {
 		LineOrderDetail.belongsTo(models.Order, {
 			onDelete: 'CASCADE',
 			foreignKey: 'OrderId',
-			constraints: false,
+			// constraints: false,
 			allowNull: false,
 		});
 		LineOrderDetail.belongsTo(models.Product, {
 			onDelete: 'CASCADE',
 			foreignKey: 'ProductId',
-			constraints: false,
+			// constraints: false,
 			allowNull: false,
 		});
 	};
