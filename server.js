@@ -16,9 +16,9 @@ const orders = require('./routes/api/orders.api');
 const status = require('./routes/api/status.api');
 const roles = require('./routes/api/roles.api');
 
-// app.use('/', (req, res) => {
-// 	res.send('Home Page at the server');
-// });
+app.use('/', (req, res) => {
+	res.send('Home Page at the server');
+});
 
 //Load database models
 const db = require('./models');
@@ -38,8 +38,15 @@ app.use('/api/orders', orders);
 app.use('/api/roles', roles);
 app.use('/api/status', status);
 
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
+
 //Fire up the server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 // { force: true }
 db.sequelize.sync().then(() => {
