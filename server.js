@@ -16,6 +16,10 @@ const orders = require('./routes/api/orders.api');
 const status = require('./routes/api/status.api');
 const roles = require('./routes/api/roles.api');
 
+app.use('/', (req, res) => {
+	res.send('Home Page at the server');
+});
+
 //Load database models
 const db = require('./models');
 
