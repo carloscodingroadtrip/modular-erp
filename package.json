@@ -1,36 +1,42 @@
 {
-  "name": "modular-erp",
-  "version": "1.0.0",
-  "description": "ERP",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/molinacarlosdev/modular-erp.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/molinacarlosdev/modular-erp/issues"
-  },
-  "homepage": "https://github.com/molinacarlosdev/modular-erp#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "concurrently": "^3.6.0",
-    "express": "^4.16.3",
-    "gravatar": "^1.6.0",
-    "jsonwebtoken": "^8.3.0",
-    "method-override": "^2.3.10",
-    "moment": "^2.22.2",
-    "mysql2": "^1.5.3",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "request": "^2.87.0",
-    "sequelize": "^4.38.0",
-    "validator": "^10.4.0"
-  }
+	"name": "modular-erp",
+	"version": "1.0.0",
+	"description": "ERP",
+	"main": "server.js",
+	"scripts": {
+		"start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+		"start:prod": "node server.js",
+		"start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+		"client": "cd client && npm run start",
+		"install": "cd client && yarn install",
+		"build": "cd client && npm run build",
+		"heroku-postbuild": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/molinacarlosdev/modular-erp.git"
+	},
+	"keywords": [],
+	"author": "Carlos Molina",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/molinacarlosdev/modular-erp/issues"
+	},
+	"homepage": "https://github.com/molinacarlosdev/modular-erp#readme",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.18.3",
+		"concurrently": "^3.6.0",
+		"express": "^4.16.3",
+		"gravatar": "^1.6.0",
+		"jsonwebtoken": "^8.3.0",
+		"method-override": "^2.3.10",
+		"moment": "^2.22.2",
+		"mysql2": "^1.5.3",
+		"passport": "^0.4.0",
+		"passport-jwt": "^4.0.0",
+		"request": "^2.87.0",
+		"sequelize": "^4.38.0",
+		"validator": "^10.4.0"
+	}
 }
