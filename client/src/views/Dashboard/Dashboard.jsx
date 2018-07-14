@@ -9,7 +9,6 @@ import ContentCopy from '@material-ui/icons/ContentCopy';
 import Store from '@material-ui/icons/Store';
 import InfoOutline from '@material-ui/icons/InfoOutline';
 import DateRange from '@material-ui/icons/DateRange';
-import LocalOffer from '@material-ui/icons/LocalOffer';
 import Update from '@material-ui/icons/Update';
 import Work from '@material-ui/icons/Work';
 

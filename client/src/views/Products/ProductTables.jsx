@@ -7,7 +7,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import Dvr from '@material-ui/icons/Dvr';
 import Favorite from '@material-ui/icons/Favorite';
-import Close from '@material-ui/icons/Close';
+import Work from '@material-ui/icons/Work';
+import Change from '@material-ui/icons/Edit';
+import Close from '@material-ui/icons/Delete';
+
 // core components
 import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem.jsx';
@@ -58,10 +61,10 @@ class ReactTables extends React.Component {
 											'\n}'
 									);
 								}}
-								color="info"
+								color="success"
 								className="edit"
 							>
-								<Favorite />
+								<Change />
 							</Button>{' '}
 							{/* use this button to add a edit kind of action */}
 							<Button
@@ -83,7 +86,7 @@ class ReactTables extends React.Component {
 								color="warning"
 								className="edit"
 							>
-								<Dvr />
+								<Work />
 							</Button>{' '}
 							{/* use this button to remove the data row */}
 							<Button

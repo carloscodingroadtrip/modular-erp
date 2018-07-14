@@ -162,7 +162,7 @@ class HeaderLinks extends React.Component {
                     >
                       {rtlActive
                         ? "إجلاء أوزار الأسيوي حين بل, كما"
-                        : "Mike John responded to your email"}
+                        : "Matrix order has been shipped"}
                     </MenuItem>
                     <MenuItem
                       onClick={this.handleClose}
@@ -170,7 +170,7 @@ class HeaderLinks extends React.Component {
                     >
                       {rtlActive
                         ? "شعار إعلان الأرضية قد ذلك"
-                        : "You have 5 new tasks"}
+                        : "Moffit order sent to production"}
                     </MenuItem>
                     <MenuItem
                       onClick={this.handleClose}
@@ -178,19 +178,19 @@ class HeaderLinks extends React.Component {
                     >
                       {rtlActive
                         ? "ثمّة الخاصّة و على. مع جيما"
-                        : "You're now friend with Andrew"}
+                        : "All Star order needs approval"}
                     </MenuItem>
                     <MenuItem
                       onClick={this.handleClose}
                       className={dropdownItem}
                     >
-                      {rtlActive ? "قد علاقة" : "Another Notification"}
+                      {rtlActive ? "قد علاقة" : "BW Industrial needs approval"}
                     </MenuItem>
                     <MenuItem
                       onClick={this.handleClose}
                       className={dropdownItem}
                     >
-                      {rtlActive ? "قد فاتّبع" : "Another One"}
+                      {rtlActive ? "قد فاتّبع" : "J&J order sent to production"}
                     </MenuItem>
                   </MenuList>
                 </Paper>
