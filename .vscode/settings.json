@@ -1,0 +1,98 @@
+{
+
+    "workbench.colorTheme": "Cobalt2",
+    "window.zoomLevel": 0,
+    "editor.fontFamily": " Inconsolata, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 18,
+    "editor.lineHeight": 25,
+    "editor.letterSpacing": 0.5,
+    "files.trimTrailingWhitespace": true,
+    "editor.fontWeight": "400",
+    "editor.find.autoFindInSelection": true,
+    // this isn't really underline-thin but we hack it to be a thicker cursor
+    "editor.cursorStyle": "line",
+    "editor.wordWrap": "on",
+    "editor.parameterHints": false,
+    "editor.cursorBlinking": "blink",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.occurrencesHighlight": false,
+    "editor.selectionHighlight": false,
+    "jshint.reportWarningsAsErrors": true,
+    "highlight-matching-tag.highlightSelfClosing": false,
+    "highlight-matching-tag.style": {
+        "textDecoration": "underline",
+        "background-color": "coral"
+    },
+    "highlight-matching-tag.rightStyle": {
+        "borderWidth": "0 1px 0 0",
+        "background-color": "#000",
+        "borderStyle": "dotted",
+        "borderColor": "yellow",
+        "borderRadius": "5px"
+    },
+    "highlight-matching-tag.leftStyle": {
+        "borderWidth": "0 0 0 1px",
+        "background-color": "#000",
+        "borderStyle": "dotted",
+        "borderColor": "yellow",
+        "borderRadius": "5px"
+    },
+    "workbench.colorCustomizations": {
+        "editorError.foreground": "#7fff00",
+        "editorError.border": "#ffd700",
+        "editor.rangeHighlightBackground": "#00AA00"
+    },
+    "liveServer.settings.donotShowInfoMsg": true,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true
+    },
+    "explorer.confirmDragAndDrop": false,
+    "gitlens.historyExplorer.enabled": true,
+    "terminal.integrated.fontSize": 16,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "jsx": "jsx",
+    },
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx",
+        "xml": {
+            "attr_quotes": "single"
+        }
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "html",
+            "autoFix": true
+        },
+        {
+            "language": "javascript",
+            "autoFix": true,
+        }
+    ],
+    "eslint.provideLintTask": true,
+    "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.alwaysShowStatus": true,
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "*.jsx": "javascriptreact"
+    },
+    "prettier.arrowParens": true,
+    "prettier.eslintIntegration": true,
+    "prettier.jsxBracketSameLine": true,
+    "prettier.trailingComma": "es5",
+    "prettier.spaceBeforeFunctionParen": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "explorer.confirmDelete": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "emmet.showSuggestionsAsSnippets": true,
+}

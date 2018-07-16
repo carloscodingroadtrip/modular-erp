@@ -209,24 +209,46 @@ const dataTable = {
 	headerRow: ['Order', 'Customer', 'Date', 'Deliver by', 'Status'],
 	footerRow: ['Order', 'Customer', 'Date', 'Deliver by', 'Status'],
 	dataRows: [
-		['180621', 'Matrix', '2018-06-01', '2018-06-12', 'Pending'],
-		['180634', 'All Star', '2018-06-01', '2018-06-12', 'Pending'],
-		['180621', 'Moffit', '2018-06-01', '2018-06-12', 'Shipped'],
-		['180621', 'ERA Industries', '2018-06-01', '2018-06-12', 'Pending'],
-		['180621', 'ICP ', '2018-06-01', '2018-06-12', 'Pending'],
-		['180621', 'BW Industrial', '2018-06-01', '2018-06-12', 'Ready to Shipped'],
-		['180621', 'Tulstar', '2018-06-01', '2018-06-12', 'Pending'],
-		['180621', 'J&J', '2018-06-01', '2018-06-12', 'Ready to Shipped'],
-		['180621', 'Mexcor', '2018-06-01', '2018-06-12', 'Pending'],
-		['180621', 'VEXAPAK', '2018-06-01', '2018-06-12', 'Pending'],
-		['180621', 'OWE Group', '2018-06-01', '2018-06-12', 'Ready to Shipped'],
-		['180621', 'WS International', '2018-06-01', '2018-06-12', 'Pending'],
+		['180621', 'MATRIX', '2018-06-01', '2018-06-07', 'Reconciled'],
+		['180634', 'All Star', '2018-06-01', '2018-06-02', 'Reconciled'],
+		['180706', 'Moffit', '2018-06-02', '2018-06-10', 'Reconciled'],
+		['180711', 'ERA Industries', '2018-06-01', '2018-06-02', 'Reconciled'],
+		['180684', 'ICP ', '2018-07-01', '2018-07-03', 'Pending'],
+		['180671', 'BW Industrial', '2018-07-11', '2018-07-12', 'Reconciled'],
+		['180693', 'TULSTAR', '2018-07-13', '2018-07-20', 'Pending'],
+		['180623', 'J&J', '2018-06-01', '2018-06-11', 'Ready to Shipped'],
+		['180622', 'Mexcor', '2018-06-03', '2018-06-12', 'Pending'],
+		['180591', 'VEXAPAK', '2018-06-05', '2018-06-12', 'Pending'],
+		['180899', 'OWE Group', '2018-06-05', '2018-06-12', 'Reconciled'],
+		['180719', 'WS International', '2018-06-12', '2018-06-19', 'Pending'],
+		['180733', 'ERA Industries', '2018-06-14', '2018-06-22', 'Reconciled'],
+		['180644', 'ICP ', '2018-07-01', '2018-07-06', 'Pending'],
+		['180614', 'BW Industrial', '2018-06-13', '2018-06-17', 'Reconciled'],
+		['180690', 'Tulstar', '2018-06-11', '2018-06-12', 'Pending'],
+		['180702', 'J&J', '2018-06-21', '2018-06-28', 'Ready to Shipped'],
+	],
+};
+
+const custData = {
+	headerRow: ['Customer', 'Phone', 'Balance'],
+	footerRow: ['Customer', 'Phone', 'Balance'],
+	dataRows: [
+		['MATRIX', 'n/a', '$56,567'],
+		['All Star', 'n/a', '$356,235'],
+		['J&J', 'n/a', '$256,353'],
+		['MEXCOR', 'n/a', '$14,552'],
+		['BW Industrial', 'n/a', '$16,152'],
+		['MOFFIT', 'n/a', '$36,552'],
+		['Lone Star', 'n/a', '$77,555'],
+		['Vexapak', 'n/a', '$46,553'],
+		['ICP International', 'n/a', '$56,452'],
+		['AutoMobile', 'n/a', '$88,555'],
 	],
 };
 
 const productTable = {
-	headerRow: ['ID', 'Description'],
-	footerRow: ['ID', 'Description'],
+	headerRow: ['Product', 'Description'],
+	footerRow: ['Product', 'Description'],
 	dataRows: [
 		['88-0W-20', 'SAE 0W-20 Full Synthetic, API SN, ILSAC GF-5'],
 		['88-5W-20', 'SAE 5W-20 Full Synthetic, API SN, ILSAC GF-5'],
@@ -277,5 +299,6 @@ export {
 	rtlServer,
 	// data for datatables.net in DataTables view
 	dataTable,
+	custData,
 	productTable,
 };

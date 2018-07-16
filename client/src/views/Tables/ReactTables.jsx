@@ -4,9 +4,10 @@ import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
+import PrintOrder from '@material-ui/icons/Print';
 import Assignment from '@material-ui/icons/Assignment';
-import Change from '@material-ui/icons/Edit';
-import Delivery from '@material-ui/icons/Receipt';
+import Reconcile from '@material-ui/icons/AssignmentTurnedIn';
+import Edited from '@material-ui/icons/Edit';
 import Work from '@material-ui/icons/Work';
 import Close from '@material-ui/icons/Delete';
 // core components
@@ -45,15 +46,15 @@ class ReactTables extends React.Component {
 					// we've added some custom button actions
 					actions: (
 						<div className="actions-right">
-							{/* use this button to add a like kind of action */}
+							{/* use this button to add a edit kind of action */}
 							<Button
 								justIcon
-								round
+								outlined
 								simple
 								onClick={() => {
 									let obj = this.state.data.find(o => o.id === key);
 									alert(
-										"You've clicked LIKE button on \n{ \nOrder: " +
+										"You've clicked EDIT button for \n{ \nOrder: " +
 											obj.order +
 											', \nCustomer: ' +
 											obj.customer +
@@ -65,9 +66,9 @@ class ReactTables extends React.Component {
 								color="success"
 								className="edit"
 							>
-								<Change />
+								<Edited />
 							</Button>{' '}
-							{/* use this button to add a edit kind of action */}
+							{/* use this button to add a print kind of action */}
 							<Button
 								justIcon
 								round
@@ -75,7 +76,7 @@ class ReactTables extends React.Component {
 								onClick={() => {
 									let obj = this.state.data.find(o => o.id === key);
 									alert(
-										"You've clicked LIKE button on \n{ \nOrder: " +
+										"You've clicked PRINT button on \n{ \nOrder: " +
 											obj.order +
 											', \nCustomer: ' +
 											obj.customer +
@@ -87,30 +88,29 @@ class ReactTables extends React.Component {
 								color="warning"
 								className="edit"
 							>
-								<Work />
+								<PrintOrder />
 							</Button>{' '}
-							{/* use this button to remove the data row */}
+							{/* use this button to reconcile the data row */}
 							<Button
 								justIcon
 								round
 								simple
 								onClick={() => {
-									var data = this.state.data;
-									data.find((o, i) => {
-										if (o.id === key) {
-											// here you should add some custom code so you can delete the data
-											// from this component and from your server as well
-											data.splice(i, 1);
-											return true;
-										}
-										return false;
-									});
-									this.setState({ data: data });
+									let obj = this.state.data.find(o => o.id === key);
+									alert(
+										"You've clicked RECONCILED button on \n{ \nOrder: " +
+											obj.order +
+											', \nCustomer: ' +
+											obj.customer +
+											'\nStatus: ' +
+											obj.status +
+											'\n}'
+									);
 								}}
-								color="danger"
+								color="info"
 								className="remove"
 							>
-								<Close />
+								<Reconcile />
 							</Button>{' '}
 						</div>
 					),
@@ -134,26 +134,57 @@ class ReactTables extends React.Component {
 							<ReactTable
 								data={this.state.data}
 								filterable
+								defaultFilterMethod={(filter, row) =>
+									String(row[filter.id]) === filter.value}
 								columns={[
 									{
 										Header: 'Order#',
 										accessor: 'order',
+										sortable: false,
+										filterable: false,
 									},
 									{
 										Header: 'Customer',
 										accessor: 'customer',
+										sortable: true,
+										filterable: true,
 									},
 									{
 										Header: 'Date',
 										accessor: 'date',
+										sortable: true,
+										filterable: false,
 									},
 									{
 										Header: 'Due by',
 										accessor: 'due',
+										sortable: true,
+										filterable: false,
 									},
 									{
 										Header: 'Status',
+										sortable: true,
 										accessor: 'status',
+										Cell: ({ value }) => (value === 'Reconciled' ? "Reconciled" : "In production"),
+											filterMethod: (filter, row) => {
+												if (filter.value === "all") {
+												return true;
+												}
+												if (filter.value === "true") {
+												return row[filter.id] === 'Reconciled';
+												}
+												return row[filter.id] === 'Pending';
+											},
+											Filter: ({ filter, onChange }) =>
+												<select
+												onChange={event => onChange(event.target.value)}
+												style={{ width: "100%" }}
+												value={filter ? filter.value : "all"}
+												>
+												<option value="all">Show All</option>
+												<option value="true">Reconciled</option>
+												<option value="false">Production</option>
+												</select>
 									},
 									{
 										Header: 'Actions',

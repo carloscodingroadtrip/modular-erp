@@ -4,7 +4,6 @@ import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 
-
 // @material-ui/icons
 import Assignment from '@material-ui/icons/Assignment';
 import Dvr from '@material-ui/icons/Dvr';
@@ -22,7 +21,7 @@ import CardBody from 'components/Card/CardBody.jsx';
 import CardIcon from 'components/Card/CardIcon.jsx';
 import CardHeader from 'components/Card/CardHeader.jsx';
 
-import { productTable } from 'variables/general.jsx';
+import { custData } from 'variables/general.jsx';
 
 import { cardTitle } from 'assets/jss/material-dashboard-pro-react.jsx';
 
@@ -38,11 +37,12 @@ class ReactTables extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: productTable.dataRows.map((prop, key) => {
+			data: custData.dataRows.map((prop, key) => {
 				return {
 					id: key,
-					Product: prop[0],
-					Description: prop[1],
+					Customer: prop[0],
+					Phone: prop[1],
+					Balance: prop[2],
 					// we've added some custom button actions
 					actions: (
 						<div className="actions-right">
@@ -53,7 +53,7 @@ class ReactTables extends React.Component {
 								simple
 								onClick={() => {
 									let obj = this.state.data.find(o => o.id === key);
-									console.log(obj)
+									console.log(obj);
 									alert(
 										"You've clicked EDIT button on \n{ \nProduct: " +
 											obj.Product +
@@ -66,7 +66,8 @@ class ReactTables extends React.Component {
 								className="edit"
 							>
 								<Change />
-							</Button>{' '}
+							</Button>
+							{''}
 							{/* use this button to add a edit kind of action */}
 							<Button
 								justIcon
@@ -86,30 +87,9 @@ class ReactTables extends React.Component {
 								className="edit"
 							>
 								<Work />
-							</Button>{' '}
+							</Button>
+							{''}
 							{/* use this button to remove the data row */}
-							<Button
-								justIcon
-								round
-								simple
-								onClick={() => {
-									var data = this.state.data;
-									data.find((o, i) => {
-										if (o.id === key) {
-											// here you should add some custom code so you can delete the data
-											// from this component and from your server as well
-											data.splice(i, 1);
-											return true;
-										}
-										return false;
-									});
-									this.setState({ data: data });
-								}}
-								color="danger"
-								className="remove"
-							>
-								<Close />
-							</Button>{' '}
 						</div>
 					),
 				};
@@ -131,18 +111,26 @@ class ReactTables extends React.Component {
 						<CardBody>
 							<ReactTable
 								data={this.state.data}
-								filterable
 								columns={[
 									{
-										Header: 'Product#',
-										accessor: 'Product',
-										maxWidth: 150
+										Header: 'Customer',
+										accessor: 'Customer',
+										minWidth: 400,
+										filterable: true,
+										placeholder: 'Search',
 									},
 									{
-										Header: 'Description',
-										accessor: 'Description',
+										Header: 'Phone',
+										accessor: 'Phone',
+										minWidth: 150,
 										sortable: false,
-										filterable: true,
+									},
+									{
+										Header: 'Balance',
+										accessor: 'Balance',
+										sortable: false,
+										maxWidth: 400,
+										filterable: false,
 									},
 									{
 										Header: 'Actions',
