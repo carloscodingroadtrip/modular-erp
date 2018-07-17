@@ -78,7 +78,7 @@ const sidebarStyle = theme => ({
 	blackBackground: {
 		color: '#fff',
 		'&:after': {
-			background: '#00253d',
+			background: '#072C3E',
 			opacity: '1',
 		},
 	},
@@ -216,7 +216,7 @@ const sidebarStyle = theme => ({
 		paddingRight: '10px',
 		transition: 'all 300ms linear',
 		margin: '10px 15px 0',
-		borderRadius: '3px',
+		borderRadius: '5px',
 		position: 'relative',
 		display: 'block',
 		padding: '10px 15px',
@@ -225,8 +225,7 @@ const sidebarStyle = theme => ({
 		width: 'auto',
 		'&:hover': {
 			outline: 'none',
-			backgroundColor: 'rgba(104, 83,89, 0.59)',
-			color: '#000',
+			backgroundColor: 'rgba(106, 164, 43, 0.25)',
 			boxShadow: 'none',
 		},
 		'&,&:hover,&:focus': {

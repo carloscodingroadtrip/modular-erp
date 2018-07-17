@@ -4,11 +4,8 @@ import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 
-
 // @material-ui/icons
 import Assignment from '@material-ui/icons/Assignment';
-import Dvr from '@material-ui/icons/Dvr';
-import Favorite from '@material-ui/icons/Favorite';
 import Work from '@material-ui/icons/Work';
 import Change from '@material-ui/icons/Edit';
 import Close from '@material-ui/icons/Delete';
@@ -53,7 +50,7 @@ class ReactTables extends React.Component {
 								simple
 								onClick={() => {
 									let obj = this.state.data.find(o => o.id === key);
-									console.log(obj)
+									console.log(obj);
 									alert(
 										"You've clicked EDIT button on \n{ \nProduct: " +
 											obj.Product +
@@ -66,7 +63,7 @@ class ReactTables extends React.Component {
 								className="edit"
 							>
 								<Change />
-							</Button>{' '}
+							</Button>
 							{/* use this button to add a edit kind of action */}
 							<Button
 								justIcon
@@ -86,7 +83,7 @@ class ReactTables extends React.Component {
 								className="edit"
 							>
 								<Work />
-							</Button>{' '}
+							</Button>
 							{/* use this button to remove the data row */}
 							<Button
 								justIcon
@@ -123,7 +120,7 @@ class ReactTables extends React.Component {
 				<GridItem xs={12}>
 					<Card>
 						<CardHeader color="primary" icon>
-							<CardIcon color="primary">
+							<CardIcon color="success">
 								<Assignment />
 							</CardIcon>
 							<h4 className={classes.cardIconTitle}>Products</h4>
@@ -134,21 +131,22 @@ class ReactTables extends React.Component {
 								filterable
 								columns={[
 									{
+										Header: 'Actions',
+										accessor: 'actions',
+										sortable: false,
+										maxWidth: 150,
+										filterable: false,
+									},
+									{
 										Header: 'Product#',
 										accessor: 'Product',
-										maxWidth: 150
+										maxWidth: 150,
 									},
 									{
 										Header: 'Description',
 										accessor: 'Description',
 										sortable: false,
 										filterable: true,
-									},
-									{
-										Header: 'Actions',
-										accessor: 'actions',
-										sortable: false,
-										filterable: false,
 									},
 								]}
 								defaultPageSize={10}

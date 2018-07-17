@@ -6,11 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 // @material-ui/icons
 import Assignment from '@material-ui/icons/Assignment';
-import Dvr from '@material-ui/icons/Dvr';
-import Favorite from '@material-ui/icons/Favorite';
-import Work from '@material-ui/icons/Work';
 import Change from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Delete';
 
 // core components
 import GridContainer from 'components/Grid/GridContainer.jsx';
@@ -54,13 +50,7 @@ class ReactTables extends React.Component {
 								onClick={() => {
 									let obj = this.state.data.find(o => o.id === key);
 									console.log(obj);
-									alert(
-										"You've clicked EDIT button on \n{ \nProduct: " +
-											obj.Product +
-											', \nDescription: ' +
-											obj.Description +
-											'\n}'
-									);
+									alert("You've clicked EDIT button on \n{ \nCustomer: " + obj.Customer + '\n}');
 								}}
 								color="success"
 								className="edit"
@@ -69,27 +59,6 @@ class ReactTables extends React.Component {
 							</Button>
 							{''}
 							{/* use this button to add a edit kind of action */}
-							<Button
-								justIcon
-								round
-								simple
-								onClick={() => {
-									let obj = this.state.data.find(o => o.id === key);
-									alert(
-										"You've clicked the ASSIGNMENT button for \n{ \nProduct: " +
-											obj.Product +
-											', \nDescription: ' +
-											obj.Description +
-											'\n}'
-									);
-								}}
-								color="warning"
-								className="edit"
-							>
-								<Work />
-							</Button>
-							{''}
-							{/* use this button to remove the data row */}
 						</div>
 					),
 				};
@@ -102,22 +71,28 @@ class ReactTables extends React.Component {
 			<GridContainer>
 				<GridItem xs={12}>
 					<Card>
-						<CardHeader color="primary" icon>
-							<CardIcon color="primary">
+						<CardHeader color="success" icon>
+							<CardIcon color="success">
 								<Assignment />
 							</CardIcon>
-							<h4 className={classes.cardIconTitle}>Products</h4>
+							<h4 className={classes.cardIconTitle}>Customers</h4>
 						</CardHeader>
 						<CardBody>
 							<ReactTable
 								data={this.state.data}
 								columns={[
 									{
+										Header: 'Actions',
+										accessor: 'actions',
+										sortable: false,
+										maxWidth: 80,
+										filterable: false,
+									},
+									{
 										Header: 'Customer',
 										accessor: 'Customer',
 										minWidth: 400,
 										filterable: true,
-										placeholder: 'Search',
 									},
 									{
 										Header: 'Phone',
@@ -129,13 +104,7 @@ class ReactTables extends React.Component {
 										Header: 'Balance',
 										accessor: 'Balance',
 										sortable: false,
-										maxWidth: 400,
-										filterable: false,
-									},
-									{
-										Header: 'Actions',
-										accessor: 'actions',
-										sortable: false,
+										maxWidth: 200,
 										filterable: false,
 									},
 								]}

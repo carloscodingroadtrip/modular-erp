@@ -75,7 +75,7 @@
   border-radius: 100%;
   transition: all 0.2s ease-out;
   border: 1px solid #9c27b0;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
 
 .noUi-vertical {
@@ -464,7 +464,7 @@
 .rdtPicker table {
   width: 100%;
   margin: 0;
-  border-color: #FFFFFF !important;
+  border-color: #ffffff !important;
   border-collapse: collapse; }
 
 .rdtPicker td,
@@ -484,7 +484,7 @@
   border-radius: 50%; }
   .rdtDay.rdtToday.rdtActive, .rdtDay.rdtActive, .rdtDay.rdtActive:hover {
     background-color: #9c27b0 !important;
-    color: #FFFFFF;
+    color: #ffffff;
     box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4); }
 
 .rdtDays tr .dow {
@@ -695,7 +695,7 @@ td.rdtYear:hover {
     .rdtYears .rdtMonth.rdtActive,
     .rdtYears .rdtYear.rdtActive {
       background-color: #9c27b0 !important;
-      color: #FFFFFF; }
+      color: #ffffff; }
 
 .sweet-alert:focus {
   outline: none; }
@@ -908,7 +908,7 @@ button.rbc-input::-moz-focus-inner {
   .open > .rbc-toolbar button.dropdown-toggle:focus,
   .open > .rbc-toolbar button.dropdown-toggle:hover {
     background-color: #9c27b0;
-    color: #FFFFFF; }
+    color: #ffffff; }
   .rbc-toolbar button:focus, .rbc-toolbar button:active, .rbc-toolbar button:hover {
     box-shadow: 0 14px 26px -12px rgba(156, 39, 176, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2); }
   .rbc-toolbar button.disabled, .rbc-toolbar button.disabled:hover, .rbc-toolbar button.disabled:focus, .rbc-toolbar button.disabled.focus, .rbc-toolbar button.disabled:active, .rbc-toolbar button.disabled.active, .rbc-toolbar button:disabled, .rbc-toolbar button:disabled:hover, .rbc-toolbar button:disabled:focus, .rbc-toolbar button:disabled.focus, .rbc-toolbar button:disabled:active, .rbc-toolbar button:disabled.active, .rbc-toolbar button[disabled], .rbc-toolbar button[disabled]:hover, .rbc-toolbar button[disabled]:focus, .rbc-toolbar button[disabled].focus, .rbc-toolbar button[disabled]:active, .rbc-toolbar button[disabled].active,
@@ -1451,7 +1451,7 @@ button.rbc-input::-moz-focus-inner {
 .jvectormap-tip {
   position: absolute;
   display: none;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 1.5em;
   background: #555555;
   border: none;
@@ -2102,7 +2102,7 @@ button.rbc-input::-moz-focus-inner {
   -ms-transition: all 300ms ease 0s;
   transition: all 300ms ease 0s;
   background-color: #9e9e9e;
-  color: #FFFFFF; }
+  color: #ffffff; }
   .react-tagsinput .react-tagsinput-tag:hover {
     padding-right: 22px; }
     .react-tagsinput .react-tagsinput-tag:hover a {
@@ -2112,41 +2112,48 @@ button.rbc-input::-moz-focus-inner {
       color: #FFFFFF; }
   .react-tagsinput .react-tagsinput-tag.primary {
     background-color: #9c27b0;
-    color: #FFFFFF; }
+    color: #ffffff; }
   .react-tagsinput .react-tagsinput-tag.info {
     background-color: #00bcd4;
-    color: #FFFFFF; }
+    color: #ffffff; }
   .react-tagsinput .react-tagsinput-tag.success {
     background-color: #4caf50;
-    color: #FFFFFF; }
+    color: #ffffff; }
   .react-tagsinput .react-tagsinput-tag.warning {
     background-color: #ff9800;
-    color: #FFFFFF; }
+    color: #ffffff; }
   .react-tagsinput .react-tagsinput-tag.danger {
     background-color: #f44336;
-    color: #FFFFFF; }
+    color: #ffffff; }
   .react-tagsinput .react-tagsinput-tag .rose {
     background-color: #e91e63;
-    color: #FFFFFF; }
+    color: #ffffff; }
 
 html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
 body {
-  background-color: #EEEEEE;
-  color: #3C4858;
+  background-color: #eeeeee;
+  color: #3c4858;
   margin: 0;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 300;
   line-height: 1.5em; }
 
-body, h1, h2, h3, h4, h5, h6 {
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 300;
   line-height: 1.5em; }
 
-blockquote footer:before, blockquote small:before {
+blockquote footer:before,
+blockquote small:before {
   content: '\2014 \00A0'; }
 
 h1 {
@@ -2177,7 +2184,9 @@ h6 {
   text-transform: uppercase;
   font-weight: 500; }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   margin-top: 10px;
   margin-bottom: 10px; }
 
@@ -2185,8 +2194,8 @@ p {
   margin: 0 0 10px; }
 
 body {
-  background-color: #EEEEEE;
-  color: #3C4858;
+  background-color: #d7dde4;
+  color: #1a1f25;
   font-size: 14px; }
 
 blockquote p {
@@ -2196,7 +2205,8 @@ a {
   color: #9c27b0;
   text-decoration: none; }
 
-a:hover, a:focus {
+a:hover,
+a:focus {
   color: #89229b;
   text-decoration: none; }
 
@@ -2210,14 +2220,17 @@ legend {
 *:focus {
   outline: 0; }
 
-a:focus, a:active,
-button:active, button:focus, button:hover,
+a:focus,
+a:active,
+button:active,
+button:focus,
+button:hover,
 button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
+input[type='reset']::-moz-focus-inner,
+input[type='button']::-moz-focus-inner,
+input[type='submit']::-moz-focus-inner,
 select::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {
+input[type='file'] > input[type='button']::-moz-focus-inner {
   outline: 0 !important; }
 
 legend {
@@ -2232,7 +2245,7 @@ output {
 label {
   font-size: 14px;
   line-height: 1.42857;
-  color: #AAAAAA;
+  color: #aaaaaa;
   font-weight: 400; }
 
 footer {
@@ -2285,7 +2298,7 @@ hr {
     top: 0;
     left: auto;
     right: 260px;
-    content: "";
+    content: '';
     z-index: 9999;
     overflow-x: hidden; } }
 
@@ -2297,12 +2310,19 @@ svg {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
   font-weight: 400;
   line-height: 1;
   color: #777; }
 
-h4 small, h5 small, h6 small {
+h4 small,
+h5 small,
+h6 small {
   font-size: 75%; }
 
 code {
@@ -2312,8 +2332,11 @@ code {
   background-color: #f9f2f4;
   border-radius: 4px; }
 
-code, kbd, pre, samp {
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace; }
+code,
+kbd,
+pre,
+samp {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; }
 
 img {
   vertical-align: middle;

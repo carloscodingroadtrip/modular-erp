@@ -8,8 +8,6 @@ import PrintOrder from '@material-ui/icons/Print';
 import Assignment from '@material-ui/icons/Assignment';
 import Reconcile from '@material-ui/icons/AssignmentTurnedIn';
 import Edited from '@material-ui/icons/Edit';
-import Work from '@material-ui/icons/Work';
-import Close from '@material-ui/icons/Delete';
 // core components
 import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem.jsx';
@@ -49,7 +47,7 @@ class ReactTables extends React.Component {
 							{/* use this button to add a edit kind of action */}
 							<Button
 								justIcon
-								outlined
+								simple
 								simple
 								onClick={() => {
 									let obj = this.state.data.find(o => o.id === key);
@@ -124,8 +122,8 @@ class ReactTables extends React.Component {
 			<GridContainer>
 				<GridItem xs={12}>
 					<Card>
-						<CardHeader color="warning" icon>
-							<CardIcon color="warning">
+						<CardHeader color="success" icon>
+							<CardIcon color="success">
 								<Assignment />
 							</CardIcon>
 							<h4 className={classes.cardIconTitle}>Orders</h4>
@@ -134,8 +132,7 @@ class ReactTables extends React.Component {
 							<ReactTable
 								data={this.state.data}
 								filterable
-								defaultFilterMethod={(filter, row) =>
-									String(row[filter.id]) === filter.value}
+								defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
 								columns={[
 									{
 										Header: 'Order#',
@@ -165,26 +162,27 @@ class ReactTables extends React.Component {
 										Header: 'Status',
 										sortable: true,
 										accessor: 'status',
-										Cell: ({ value }) => (value === 'Reconciled' ? "Reconciled" : "In production"),
-											filterMethod: (filter, row) => {
-												if (filter.value === "all") {
+										Cell: ({ value }) => (value === 'Reconciled' ? 'Reconciled' : 'In production'),
+										filterMethod: (filter, row) => {
+											if (filter.value === 'all') {
 												return true;
-												}
-												if (filter.value === "true") {
+											}
+											if (filter.value === 'true') {
 												return row[filter.id] === 'Reconciled';
-												}
-												return row[filter.id] === 'Pending';
-											},
-											Filter: ({ filter, onChange }) =>
-												<select
+											}
+											return row[filter.id] === 'Pending';
+										},
+										Filter: ({ filter, onChange }) => (
+											<select
 												onChange={event => onChange(event.target.value)}
-												style={{ width: "100%" }}
-												value={filter ? filter.value : "all"}
-												>
+												style={{ width: '100%' }}
+												value={filter ? filter.value : 'all'}
+											>
 												<option value="all">Show All</option>
 												<option value="true">Reconciled</option>
 												<option value="false">Production</option>
-												</select>
+											</select>
+										),
 									},
 									{
 										Header: 'Actions',

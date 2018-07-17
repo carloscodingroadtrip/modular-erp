@@ -18,19 +18,14 @@ import Language from '@material-ui/icons/Language';
 
 const us_flag = require('assets/img/flags/US.png');
 const mx_flag = require('assets/img/flags/MX.png');
-const vn_flag = require('assets/img/flags/VN.png');
+const ru_flag = require('assets/img/flags/RU.png');
 
 var mapData = {
-	AU: 760,
-	BR: 550,
-	CA: 120,
-	DE: 1300,
-	FR: 540,
-	GB: 690,
-	GE: 200,
-	IN: 200,
-	RO: 600,
+	VT: 760,
+	MX: 550,
 	RU: 300,
+	BR: 200,
+	CO: 150,
 	US: 2920,
 };
 class CustomersMap extends Component {
@@ -53,7 +48,7 @@ class CustomersMap extends Component {
 										tableData={[
 											[<img src={us_flag} alt="us_flag" />, 'USA', '2.920', '69.20%'],
 											[<img src={mx_flag} alt="mx_flag" />, 'Mexico', '1.300', '20.43%'],
-											[<img src={vn_flag} alt="vn_flag" />, 'Vietnam', '760', '10.35%'],
+											[<img src={ru_flag} alt="ru_flag" />, 'Russia', '760', '10.35%'],
 										]}
 									/>
 								</GridItem>

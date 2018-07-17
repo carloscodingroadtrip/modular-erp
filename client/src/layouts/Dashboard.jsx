@@ -85,12 +85,12 @@ class Dashboard extends React.Component {
 			<div className={classes.wrapper}>
 				<Sidebar
 					routes={dashboardRoutes}
-					logoText={'Lubrimar CRM'}
+					logoText={'MOLINA ERP'}
 					logo={logo}
 					image={image}
 					handleDrawerToggle={this.handleDrawerToggle}
 					open={this.state.mobileOpen}
-					color="orange"
+					color="green"
 					bgColor="black"
 					miniActive={this.state.miniActive}
 					{...rest}

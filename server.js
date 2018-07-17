@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //Fire up the server
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 // { force: true }
 db.sequelize.sync().then(() => {

@@ -9,8 +9,8 @@ class CustomersMap extends Component {
 		const { classes } = this.props;
 		return (
 			<div>
-				<CustList />
 				<CustMap />
+				<CustList />
 			</div>
 		);
 	}
